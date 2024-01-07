@@ -26,8 +26,6 @@ phases:
       - echo Entered the build phase...
       - echo Build started on `date`
       - aws s3 ls
-      - chmod +x appspec.yml
-      - ./appspec.yml
       - cat newfile.txt  # assuming newfile.txt is not a script but a text file
       - bash pawan.sh
 
