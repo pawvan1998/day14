@@ -1,23 +1,28 @@
 version: 0.2
 
-# Set an environment variable that can be used below in the build phases.
 env:
   variables:
     TEST_VAR: "t2.micro"
+
 phases:
   install:
     commands:
+      - set -e
       - echo Entered the install phase
       - apt-get update -y
     finally:
       - echo This always runs even if the update or install command fails
+
   pre_build:
     commands:
+      - set -e
       - echo Entered the pre_build phase...
     finally:
       - echo This always runs even if the login command fails
+
   build:
     commands:
+      - set -e
       - ls -altr
       - printenv
       - echo $TEST_VAR
@@ -26,12 +31,13 @@ phases:
       - echo Entered the build phase...
       - echo Build started on `date`
       - aws s3 ls
-      - cat newfile.txt  # assuming newfile.txt is not a script but a text file
+      - cat newfile.txt
       - bash pawan.sh
-
     finally:
       - echo This always runs even if the install command fails
+
   post_build:
     commands:
+      - set -e
       - echo Entered the post_build phase...
       - echo Build completed on `date`
